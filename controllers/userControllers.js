@@ -19,7 +19,10 @@ const signup = async (req, res, next) => {
 
   try {
     // encrypt the password
-    const hashedPwd = await bcrypt.hash(password, 12);
+    const hashedPwd = await bcrypt.hash(
+      password,
+      parseInt(process.env.SIGNUP_ACCESS)
+    );
 
     // add the new user to the DataBase
     const result = await User.create({
