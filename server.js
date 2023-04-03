@@ -8,6 +8,9 @@ const connectDB = require('./config/connectDB');
 const { requestLogger, errorLogger } = require('./middleware/logEvents');
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
+
+const userRoutes = require('./routes/user');
+
 const errorHandler = require('./middleware/errorHandler');
 
 const PORT = normalizePort(process.env.PORT || '3000');
@@ -24,6 +27,9 @@ app.use(cors(corsOptions));
 
 // Parse req.body in JSON format
 app.use(express.json());
+
+// Routes
+app.use('/api/auth/', userRoutes);
 
 // Monitoring errors
 app.use(errorLogger);
