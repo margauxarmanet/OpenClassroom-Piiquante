@@ -9,6 +9,7 @@ const { requestLogger, errorLogger } = require('./middleware/logEvents');
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 
+const path = require('path');
 const userRoutes = require('./routes/user');
 
 const errorHandler = require('./middleware/errorHandler');
@@ -27,6 +28,9 @@ app.use(cors(corsOptions));
 
 // Parse req.body in JSON format
 app.use(express.json());
+
+// Static images
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Routes
 app.use('/api/auth/', userRoutes);
